@@ -1,11 +1,4 @@
-import {
-  PrimaryKey,
-  IsEmail,
-  Column,
-  Model,
-  Table,
-  IsDate,
-} from 'sequelize-typescript';
+import { IsEmail, Column, Model, Table } from 'sequelize-typescript';
 
 @Table
 export class User extends Model {
