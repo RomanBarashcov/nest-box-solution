@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  nest-db-test:
+    image: postgres:11
+    container_name: nest-db-test
+    ports:
+      - '5432:5432'
+    restart: always
+    volumes:
+      - ./tmp/nest-db/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nest-box-solution-test
+
+

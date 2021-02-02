@@ -3,7 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { User } from '../infrastructure/postgres/models/user';
+import { User } from '../infrastructure/postgres/models/User';
 
 @Module({
   imports: [

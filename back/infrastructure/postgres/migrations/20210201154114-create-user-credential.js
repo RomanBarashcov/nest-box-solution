@@ -15,7 +15,6 @@ module.exports = {
         validate: {
           notEmpty: true,
         },
-
         references: {
           model: 'Users',
           key: 'id',

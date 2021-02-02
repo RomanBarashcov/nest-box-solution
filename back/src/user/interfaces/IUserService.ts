@@ -1,4 +1,4 @@
-import { User } from '../../../infrastructure/postgres/models/user';
+import { User } from '../../../infrastructure/postgres/models/User';
 
 export interface IUserService {
   findAll(): Promise<User[]>;

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IUserRepository } from './interfaces/IUserRepository';
 import { IUserService } from './interfaces/IUserService';
-import { User } from '../../infrastructure/postgres/models/user';
+import { User } from '../../infrastructure/postgres/models/User';
 
 @Injectable()
 export class UserService implements IUserService {

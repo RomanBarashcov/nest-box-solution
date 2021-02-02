@@ -23,6 +23,9 @@ module.exports = {
       socialId: {
         type: Sequelize.STRING,
       },
+      authType: {
+        type: Sequelize.DataTypes.ENUM('google', 'facebook', 'apple'),
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
-import { User } from '../../infrastructure/postgres/models/user';
+import { User } from '../../infrastructure/postgres/models/User';
 import { IUserRepository } from './interfaces/IUserRepository';
 
 @Injectable()

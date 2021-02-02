@@ -4,7 +4,7 @@ import { UserRepository } from './user.repository';
 import { UserService } from './user.service';
 import { AppModule } from '../app.module';
 import { IUserService } from './interfaces/IUserService';
-import { User } from '../../infrastructure/postgres/models/user';
+import { User } from '../../infrastructure/postgres/models/User';
 
 describe('UserController', () => {
   let controller: UserController;

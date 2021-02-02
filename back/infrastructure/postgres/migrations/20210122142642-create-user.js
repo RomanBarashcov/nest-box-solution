@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       isActive: {
-        type: Sequelize.BOOL,
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       role: {
