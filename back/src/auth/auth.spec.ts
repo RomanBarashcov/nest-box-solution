@@ -8,12 +8,11 @@ import { exec } from 'child_process';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../app.module';
 import * as request from 'supertest';
-import { UserService } from '../user/user.service';
-import { UserController } from '../user/user.controller';
-import { UserRepository } from '../user/user.repository';
+import { UserService } from '../user/services/user.service';
+import { UserController } from '../user/controllers/user.controller';
+import { UserRepository } from '../user/repositories/user.repository';
 
 describe('DockerComposeEnvironment', () => {
-  jest.setTimeout(30000);
 
   const beforeAll = async () => {
     let environment;

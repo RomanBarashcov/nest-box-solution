@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import { UserRepository } from './user.repository';
-import { UserService } from './user.service';
-import { AppModule } from '../app.module';
-import { IUserService } from './interfaces/IUserService';
-import { User } from '../../infrastructure/postgres/models/User';
+import { UserRepository } from '../repositories/user.repository';
+import { UserService } from '../services/user.service';
+import { AppModule } from '../../app.module';
+import { IUserService } from '../interfaces/i.user.service';
+import { User } from '../../../infrastructure/postgres/models/User';
 
 describe('UserController', () => {
   let controller: UserController;

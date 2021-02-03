@@ -38,4 +38,8 @@ export class User extends Model {
 
   @HasOne(() => UserCredential)
   userCredential: UserCredential;
+
+  constructor() {
+    super();
+  }
 }

@@ -1,6 +1,6 @@
 import { Controller, Get, Inject, Param } from '@nestjs/common';
-import { IUserService } from './interfaces/IUserService';
-import { User } from '../../infrastructure/postgres/models/User';
+import { IUserService } from '../interfaces/i.user.service';
+import { User } from '../../../infrastructure/postgres/models/User';
 
 @Controller('user')
 export class UserController {
