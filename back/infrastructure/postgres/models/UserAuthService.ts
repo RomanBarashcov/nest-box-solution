@@ -16,6 +16,6 @@ export class UserAuthService extends Model {
   @Column
   socialId: string;
 
-  @Column(DataType.ENUM)
+  @Column(DataType.ENUM('google', 'facebook', 'apple'))
   authType: string;
 }

@@ -5,7 +5,10 @@ import {
   Table,
   HasOne,
   DataType,
+  Unique,
+  BelongsTo,
 } from 'sequelize-typescript';
+
 import { UserActivationToken } from './UserActivationToken';
 import { UserAuthService } from './UserAuthService';
 import { UserCredential } from './UserCredential';
@@ -21,25 +24,22 @@ export class User extends Model {
   @Column
   isActive: boolean;
 
-  @Column(DataType.ENUM)
+  @Column(DataType.ENUM('user', 'admin'))
   role: string;
 
-  @HasOne(() => UserProfile)
+  @HasOne(() => UserProfile, 'fk_userId')
   userProfile: UserProfile;
 
-  @HasOne(() => UserActivationToken)
+  @HasOne(() => UserActivationToken, 'userId')
   userActivationToken: UserActivationToken;
 
-  @HasOne(() => UserResetPasswordToken)
+  @HasOne(() => UserResetPasswordToken, 'userId')
   userResetPasswordToken: UserResetPasswordToken;
 
-  @HasOne(() => UserAuthService)
+  @HasOne(() => UserAuthService, 'userId')
   userAuthService: UserAuthService;
 
-  @HasOne(() => UserCredential)
+  @HasOne(() => UserCredential, 'userId')
   userCredential: UserCredential;
 
-  constructor() {
-    super();
-  }
 }

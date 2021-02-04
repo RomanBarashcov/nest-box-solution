@@ -3,8 +3,8 @@ import { User } from './User';
 
 @Table
 export class UserProfile extends Model {
+  @BelongsTo(() => User, 'fk_userId')
   @Column
-  @BelongsTo(() => User, 'userId')
   userId: string;
 
   @Column

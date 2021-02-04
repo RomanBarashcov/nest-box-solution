@@ -4,17 +4,21 @@ import { validate as validatePassword } from '../../../infrastructure/validators
 import { User } from '../../../infrastructure/postgres/models/User';
 
 export class UserEntity {
-  private repository: IUserRepository;
-  private user: User;
+  private _repository: IUserRepository;
+  private _user: User;
+
+  get user(): User {
+    return this._user;
+  }
 
   public setRepository(userRep: IUserRepository): void {
-    this.repository = userRep;
+    this._repository = userRep;
   }
 
   public new(id: string, email: string, isActive: boolean): void {
-    this.user.id = id;
-    this.user.email = email;
-    this.user.isActive = isActive;
+    this._user.id = id;
+    this._user.email = this.setUserEmail(email);
+    this._user.isActive = isActive;
   }
 
   public setUserProfile(
@@ -23,22 +27,58 @@ export class UserEntity {
     lastName: string,
     mobile: string,
   ): void {
-    this.user.userProfile.userId = userId;
-    this.user.userProfile.firstName = firstName;
-    this.user.userProfile.firstName = lastName;
-    this.user.userProfile.mobile = mobile;
+    this._user.userProfile.userId = userId;
+    this._user.userProfile.firstName = firstName;
+    this._user.userProfile.firstName = lastName;
+    this._user.userProfile.mobile = mobile;
   }
 
   public setUserCredential(userId: string, password: string): void {
-    this.user.userCredential.userId = userId;
-    this.user.userCredential.password = password;
+    this._user.userCredential.userId = userId;
+    this._user.userCredential.password = this.setUserPassword(password);
   }
 
-  public async create(): Promise<User> {
-    return await this.repository.create(this.user);
+  public setUserAuthApproach(
+    userId: string,
+    socialId: string,
+    authType: string,
+  ) {
+    this._user.userAuthService.userId = userId;
+    this._user.userAuthService.socialId = socialId;
+    this._user.userAuthService.authType = authType;
   }
 
-  public async update(user: UserEntity): Promise<User> {
-    return await this.repository.update(this.user);
+  public setUserActivationToken(
+    userId: string,
+    token: string,
+    isActive: boolean,
+  ) {
+    this._user.userActivationToken.userId = userId;
+    this._user.userActivationToken.token = token;
+    this._user.userActivationToken.isActive = isActive;
+  }
+
+  private setUserEmail(email: string): string {
+    if (validateEmail(email)) {
+      return email;
+    }
+
+    throw 'Email does not valid!';
+  }
+
+  private setUserPassword(password: string): string {
+    if (validatePassword(password)) {
+      return password;
+    }
+
+    throw 'Password does not valid!';
+  }
+
+  public async save(): Promise<User> {
+    return await this._repository.create(this._user);
+  }
+
+  public async update(): Promise<User> {
+    return await this._repository.update(this._user);
   }
 }
