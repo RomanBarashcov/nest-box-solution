@@ -27,19 +27,18 @@ export class User extends Model {
   @Column(DataType.ENUM('user', 'admin'))
   role: string;
 
-  @HasOne(() => UserProfile, 'fk_userId')
+  @HasOne(() => UserProfile)
   userProfile: UserProfile;
 
-  @HasOne(() => UserActivationToken, 'userId')
+  @HasOne(() => UserActivationToken)
   userActivationToken: UserActivationToken;
 
-  @HasOne(() => UserResetPasswordToken, 'userId')
+  @HasOne(() => UserResetPasswordToken)
   userResetPasswordToken: UserResetPasswordToken;
 
-  @HasOne(() => UserAuthService, 'userId')
+  @HasOne(() => UserAuthService)
   userAuthService: UserAuthService;
 
-  @HasOne(() => UserCredential, 'userId')
+  @HasOne(() => UserCredential)
   userCredential: UserCredential;
-
 }

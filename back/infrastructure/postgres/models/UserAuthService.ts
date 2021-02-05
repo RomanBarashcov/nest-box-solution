@@ -1,7 +1,7 @@
 import {
   BelongsTo,
   Column,
-  DataType,
+  DataType, ForeignKey,
   Model,
   Table,
 } from 'sequelize-typescript';
@@ -9,9 +9,12 @@ import { User } from './User';
 
 @Table
 export class UserAuthService extends Model {
+  @ForeignKey(() => User)
   @Column
-  @BelongsTo(() => User, 'userId')
   userId: string;
+
+  @BelongsTo(() => User, 'UserId')
+  user: User;
 
   @Column
   socialId: string;
