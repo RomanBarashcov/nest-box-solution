@@ -1,9 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserController } from './user.controller';
+
 import { UserRepository } from '../repositories/user.repository';
-import { UserService } from '../services/user.service';
 import { AppModule } from '../../app.module';
-import { IUserService } from '../interfaces/i.user.service';
 import { User } from '../../../infrastructure/postgres/models/User';
 import { RegistrationController } from './registration.controller';
 import { UserFactory } from '../user.factory';
@@ -13,7 +11,6 @@ import { MailSenderService } from '../../mail/mail.sender.service';
 import { TemplateCreatorService } from '../../mail/template.creator.service';
 import { RegistrationDto } from '../dtos/registration.dto';
 import { MailModule } from '../../mail/mail.module';
-import { MailerService } from '@nestjs-modules/mailer';
 
 describe('RegistrationController', () => {
   let controller: RegistrationController;
@@ -69,9 +66,10 @@ describe('RegistrationController', () => {
         .spyOn(userRegistrationService, 'executeRegistration')
         .mockImplementation(async () => output);
 
-      expect(await userRegistrationService.executeRegistration(input)).toBe(
-        output,
+      const outResult = await userRegistrationService.executeRegistration(
+        input,
       );
+      expect(outResult).toBe(output);
     });
   });
 });

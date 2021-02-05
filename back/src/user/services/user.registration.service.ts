@@ -4,16 +4,15 @@ import { IUserRepository } from '../interfaces/i.user.repository';
 import { User } from '../../../infrastructure/postgres/models/User';
 import { IUserRegistrationService } from '../interfaces/i.user.registration.service';
 import { RegistrationDto } from '../dtos/registration.dto';
-import { UserFactory } from '../user.factory';
 import * as activationTokenGenerator from '../../../infrastructure/generators/token.generator';
 import { TemplateCreatorService } from '../../mail/template.creator.service';
 import { MailSenderService } from '../../mail/mail.sender.service';
+import { AggregateUserRootEntity } from '../entites/aggregate.user.root.entity';
 
 @Injectable()
 export class UserRegistrationService implements IUserRegistrationService {
   constructor(
     @Inject('UserRepository') private userRepository: IUserRepository,
-    @Inject('UserFactory') private userFactory: UserFactory,
     @Inject('MailSenderService') private mailSenderService: MailSenderService,
     @Inject('TemplateCreatorService')
     private templateCreatorService: TemplateCreatorService,
@@ -26,11 +25,10 @@ export class UserRegistrationService implements IUserRegistrationService {
     }
 
     const activationToken = activationTokenGenerator.generate();
-    const user = this.userFactory.createUserObject();
-
-    user.new('', registrationDto.email, false);
-    user.setUserCredential('', registrationDto.password);
-    user.setUserActivationToken('', activationToken, false);
+    const aggrUserRootEntity = new AggregateUserRootEntity();
+    aggrUserRootEntity.setUser('', registrationDto.email, false, 'user');
+    aggrUserRootEntity.setUserCredential('', '', registrationDto.password);
+    aggrUserRootEntity.setUserActivationToken('', '', activationToken, false);
 
     const emailTemplate = this.templateCreatorService.createTemplateForFinishedRegistration(
       registrationDto.email,
@@ -41,6 +39,6 @@ export class UserRegistrationService implements IUserRegistrationService {
       emailTemplate,
     );
 
-    return await user.save();
+    return await aggrUserRootEntity.save();
   }
 }

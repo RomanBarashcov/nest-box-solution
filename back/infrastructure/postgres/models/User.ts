@@ -30,15 +30,15 @@ export class User extends Model {
   @HasOne(() => UserProfile)
   userProfile: UserProfile;
 
+  @HasOne(() => UserCredential)
+  userCredential: UserCredential;
+
   @HasOne(() => UserActivationToken)
   userActivationToken: UserActivationToken;
-
-  @HasOne(() => UserResetPasswordToken)
-  userResetPasswordToken: UserResetPasswordToken;
 
   @HasOne(() => UserAuthService)
   userAuthService: UserAuthService;
 
-  @HasOne(() => UserCredential)
-  userCredential: UserCredential;
+  @HasOne(() => UserResetPasswordToken)
+  userResetPasswordToken: UserResetPasswordToken;
 }
